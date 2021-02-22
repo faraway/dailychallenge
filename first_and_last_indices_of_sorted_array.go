@@ -23,6 +23,12 @@ func main() {
 	fmt.Println(getRange([]int{1,3,3,5,7,8,9,9,9,15}, 9)) //[6,8]
 	fmt.Println(getRange([]int{100, 150, 150, 153}, 150)) //[1,2]
 	fmt.Println(getRange([]int{1,2,3,4,5,6,10}, 9)) //[-1,-1]
+	fmt.Println(getRange([]int{1,3,3,5,7,8,9}, 5)) //[3,3]
+	fmt.Println(getRange([]int{3,5}, 5)) //[1,1]
+	fmt.Println(getRange([]int{3,5}, 3)) //[0,0]
+	fmt.Println(getRange([]int{3,5}, 4)) //[-1,-1]
+	fmt.Println(getRange([]int{1}, 1)) //[0,0]
+	fmt.Println(getRange([]int{1}, 9)) //[-1,-1]
 }
 
 
