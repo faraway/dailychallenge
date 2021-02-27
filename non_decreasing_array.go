@@ -32,17 +32,31 @@ func check(input []int) bool {
 			break
 		}
 	}
-	if idx == -1 { //non-decreasing
+	if idx == -1 { //non-decreasing, simply return true
 		return true
-	} else { //decreasing happens
+	} else {
+		//first decreasing happens, now let's try change one number to still make it a non-decreasing array
+		//there are only two options to change one number to get us back on track
+
+		//    index-2  bigger(index-1)  smaller(index)
+		//                   =
+		//      =            =
+		//      =            =                 =              ...
+		//      =            =                 =              ...
+		//      =            =                 =              ...
+		//-----------------------------------------------------------
+
 		//option1: make the smaller number as big as the previous one
 		input[idx] = input[idx-1]
 		if isNonDecreasing(input) { return true }
+
 		//option2: make the previous bigger value as small as current one
 		input[idx-1] = idxOriginalVal
 		input[idx] = idxOriginalVal
 		if isNonDecreasing(input) { return true }
 	}
+
+	//no fix possible
 	return false
 }
 
