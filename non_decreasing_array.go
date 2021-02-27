@@ -17,29 +17,33 @@ func main() {
 	fmt.Println("initializing test data...")
 
 	fmt.Println("Answer is:", check([]int{13,4,7})) //true
-	fmt.Println("Answer is:", check([]int{13,4,7})) //false
+	fmt.Println("Answer is:", check([]int{13,4,1})) //false
 	fmt.Println("Answer is:", check([]int{5,10,3,7})) //false
 }
 
 func check(input []int) bool {
 	idx := -1
-	value := 0
+	idxOriginalVal := 0
+	// check to see if the array has decreasing value, if there is, find the first occurrence
 	for index, _ := range input {
 		if index > 0 && input[index]<input[index-1] {
 			idx = index
-			value = input[index]
+			idxOriginalVal = input[index]
 			break
 		}
 	}
-	if (idx == -1) {
+	if idx == -1 { //non-decreasing
 		return true
-	} else {
+	} else { //decreasing happens
+		//option1: make the smaller number as big as the previous one
 		input[idx] = input[idx-1]
-		if (isNonDecreasing(input)) { return true }
-		input[idx-1] = value
-		if (isNonDecreasing(input)) { return true }
+		if isNonDecreasing(input) { return true }
+		//option2: make the previous bigger value as small as current one
+		input[idx-1] = idxOriginalVal
+		input[idx] = idxOriginalVal
+		if isNonDecreasing(input) { return true }
 	}
-	return false 
+	return false
 }
 
 func isNonDecreasing(array []int) bool {
