@@ -26,6 +26,15 @@ func main() {
 	root.right.left = &TreeNode{value: 10}
 	root.right.right = &TreeNode{value: 14}
 
+	// test binary search tree
+	//                 8
+	//               /   \
+	//              /     \
+	//             4       12
+	//            / \      / \
+	//           /   \    /   \
+	//          2     6  10   14
+
 	floor, ceiling, f1, f2 := findFloorAndCeiling(root, 4)  //4 4 true true
 	fmt.Println("Answer is:", floor, ceiling, f1, f2)
 	floor, ceiling, f1, f2 = findFloorAndCeiling(root, 5)  //4 6 true true
