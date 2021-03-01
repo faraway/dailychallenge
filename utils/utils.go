@@ -18,6 +18,21 @@ type ListNode struct {
 	Next *ListNode
 }
 
+//Not that I don't know generics..Just for backwards compatibility
+type TreeNodeStr struct {
+	Value string
+	Left *TreeNodeStr
+	Right *TreeNodeStr
+}
+
+//Print the tree with in "pre order"
+func (node *TreeNodeStr) PrintPreorder() {
+	if node == nil { return }
+	fmt.Print(node.Value," ")
+	node.Left.PrintPreorder()
+	node.Right.PrintPreorder()
+}
+
 func TestFunc() {
 	fmt.Println("calling package function...")
 }
