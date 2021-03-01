@@ -19,6 +19,7 @@ type ListNode struct {
 }
 
 //Not that I don't know generics..Just for backwards compatibility
+//(so that I don't have to refactor all existing code)
 type TreeNodeStr struct {
 	Value string
 	Left *TreeNodeStr
