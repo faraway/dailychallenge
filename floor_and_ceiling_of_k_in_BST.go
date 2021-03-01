@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	. "dailychallenge/utils"
+	"fmt"
+)
 
 /**
 Given an integer k and a binary search tree,
@@ -8,23 +11,18 @@ find the floor (less than or equal to) of k,
 and the ceiling (larger than or equal to) of k.
 If either does not exist, then print them as None.
  */
-type TreeNode struct {
-	value int
-	left *TreeNode
-	right *TreeNode
-}
 
 func main() {
 	fmt.Println("initializing test data...")
-	root := &TreeNode{value: 8}
-	root.left = &TreeNode{value: 4}
-	root.right = &TreeNode{value: 12}
+	root := &TreeNode{Value: 8}
+	root.Left = &TreeNode{Value: 4}
+	root.Right = &TreeNode{Value: 12}
 
-	root.left.left = &TreeNode{value: 2}
-	root.left.right = &TreeNode{value: 6}
+	root.Left.Left = &TreeNode{Value: 2}
+	root.Left.Right = &TreeNode{Value: 6}
 
-	root.right.left = &TreeNode{value: 10}
-	root.right.right = &TreeNode{value: 14}
+	root.Right.Left = &TreeNode{Value: 10}
+	root.Right.Right = &TreeNode{Value: 14}
 
 	// test binary search tree
 	//                 8
@@ -50,26 +48,26 @@ func main() {
 
 func findFloorAndCeiling(root *TreeNode, k int) (floor int, ceiling int, floorFound bool, ceilingFound bool) {
 	if root == nil {
-		//node value can be any number, "-1" doesn't really represent "NotFound" information.
+		//node Value can be any number, "-1" doesn't really represent "NotFound" information.
 		//so we use 'floorFound' and 'ceilingFound' to indicate that
 		return -1, -1, false, false
 	}
 
-	if root.value < k {
-		//root can be the 'floor' candidate; both floor and ceiling can be further searched in *right* subtree
-		childFloor, childCeiling, childFloorFound, childCeilingFound := findFloorAndCeiling(root.right, k)
+	if root.Value < k {
+		//root can be the 'floor' candidate; both floor and ceiling can be further searched in *Right* subtree
+		childFloor, childCeiling, childFloorFound, childCeilingFound := findFloorAndCeiling(root.Right, k)
 		if !childFloorFound {
-			childFloor = root.value
+			childFloor = root.Value
 		}
 		return childFloor, childCeiling, true, childCeilingFound
-	} else if root.value > k {
-		//root can be the 'ceiling' candidate; both floor and ceiling can be further searched in *left* subtree
-		childFloor, childCeiling, childFloorFound, childCeilingFound := findFloorAndCeiling(root.left, k)
+	} else if root.Value > k {
+		//root can be the 'ceiling' candidate; both floor and ceiling can be further searched in *Left* subtree
+		childFloor, childCeiling, childFloorFound, childCeilingFound := findFloorAndCeiling(root.Left, k)
 		if !childCeilingFound {
-			childCeiling = root.value
+			childCeiling = root.Value
 		}
 		return childFloor, childCeiling, childFloorFound, true
-	} else { // root.value == k -> floor and ceiling IS k by definition
+	} else { // root.Value == k -> floor and ceiling IS k by definition
 		return k, k, true, true
 	}
 

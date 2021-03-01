@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import  (
+	. "dailychallenge/utils"
+	"fmt"
+)
 
 /**
 
@@ -11,18 +14,14 @@ Input: 4 -> 3 -> 2 -> 1 -> 0 -> NULL
 Output: 0 -> 1 -> 2 -> 3 -> 4 -> NULL
 
 */
-type LinkedListNode struct {
-	val int
-	next *LinkedListNode //pointer to the next node. Simply 'listNode' won't work
-}
 
 func main() {
 	fmt.Println("initializing test data...")
-	head := &LinkedListNode{val: 4}
-	head.next = &LinkedListNode{val: 3}
-	head.next.next = &LinkedListNode{val: 2}
-	head.next.next.next = &LinkedListNode{val: 1}
-	head.next.next.next.next = &LinkedListNode{val: 0}
+	head := &ListNode{Value: 4}
+	head.Next = &ListNode{Value: 3}
+	head.Next.Next = &ListNode{Value: 2}
+	head.Next.Next.Next = &ListNode{Value: 1}
+	head.Next.Next.Next.Next = &ListNode{Value: 0}
 	newHead := reverseIteratively(head)
 	printList(newHead)
 	fmt.Println("\n-----------------------")
@@ -30,10 +29,10 @@ func main() {
 	printList(newHead2)
 }
 
-func printList(head *LinkedListNode) {
+func printList(head *ListNode) {
 	for head != nil {
-		fmt.Print(head.val, "->")
-		head = head.next
+		fmt.Print(head.Value, "->")
+		head = head.Next
 	}
 	fmt.Print("nil")
 }
@@ -41,32 +40,32 @@ func printList(head *LinkedListNode) {
 /**
 Reverse the linked list iteratively
  */
-func reverseIteratively(head *LinkedListNode) *LinkedListNode {
+func reverseIteratively(head *ListNode) *ListNode {
 	if head == nil { return head } // nil list
 	previous := head
-	current := previous.next
+	current := previous.Next
 	if current == nil { return head } //single node linkedList
 
-	previous.next = nil //this is now the tail of the to be reversed linked list
+	previous.Next = nil //this is now the tail of the to be reversed linked list
 	for current != nil {
-		temp := current.next
-		current.next = previous
+		temp := current.Next
+		current.Next = previous
 		previous = current
 		current = temp
 	}
-	//'current' will be nil, 'previous' will be the last valid node, which will be the head
+	//'current' will be nil, 'previous' will be the last Valueid node, which will be the head
 	return previous
 }
 
 /**
 Reverse the linked list recursively
  */
-func reverseRecursively(head *LinkedListNode) *LinkedListNode {
+func reverseRecursively(head *ListNode) *ListNode {
 	if head == nil { return nil }
-	if head.next == nil { return head }
+	if head.Next == nil { return head }
 
-	newHead := reverseRecursively(head.next)
-	head.next.next = head
-	head.next = nil //break the current link
+	newHead := reverseRecursively(head.Next)
+	head.Next.Next = head
+	head.Next = nil //break the current link
 	return newHead
 }

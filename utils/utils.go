@@ -14,7 +14,7 @@ type TreeNode struct {
 }
 
 type ListNode struct {
-	Val int
+	Value int
 	Next *ListNode
 }
 
