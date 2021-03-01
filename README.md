@@ -1,4 +1,4 @@
-#Daily Challenge
+# Daily Challenge
 This repository contains the code challenge solutions to the questions from *Daily Interview Pro* (https://www.techseries.dev/daily)
 
 ### Code Structure
