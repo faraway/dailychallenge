@@ -52,9 +52,9 @@ func getEditDistance(s1 string, s2 string) int {
 			if i==0 && j==0 {
 				matrix[i][j] = charMatch
 			} else if i==0 {
-				matrix[i][j] = MIN(matrix[i][j-1]+1, j+charMatch)
+				matrix[i][j] = MIN(matrix[i][j-1]+1, j+charMatch) //Same 3 options here, but omit "j+1" since j+1 always >= j+charMatch
 			} else if j==0 {
-				matrix[i][j] = MIN(matrix[i-1][j]+1, i+charMatch)
+				matrix[i][j] = MIN(matrix[i-1][j]+1, i+charMatch) //same for "i+1"
 			} else {
 				matrix[i][j] = MIN(matrix[i][j-1]+1, matrix[i-1][j]+1, matrix[i-1][j-1]+charMatch)
 			}
