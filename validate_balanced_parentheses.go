@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	. "dailychallenge/utils"
+	"fmt"
+)
 
 
 /**
@@ -57,36 +60,4 @@ func isPair(closingItem string, item string) bool {
 	}
 }
 
-/* Definition of stack */
-type Stack []interface{}
 
-func (s *Stack) Push(item interface{}) {
-	*s = append(*s, item)
-}
-
-func (s *Stack) Pop() (interface{}, bool) {
-	if s.IsEmpty() {
-		return nil, false
-	} else {
-		lastIndex := len(*s) - 1
-		item := (*s)[lastIndex]
-		*s = (*s)[:lastIndex]
-		return item, true
-	}
-}
-
-func (s *Stack) Peek() (interface{}, bool) {
-	if s.IsEmpty() {
-		return nil, false
-	} else {
-		return (*s)[len(*s) - 1], true
-	}
-}
-
-func (s *Stack) IsEmpty() bool {
-	return len(*s) == 0
-}
-
-func (s *Stack) Size() int {
-	return len(*s)
-}
