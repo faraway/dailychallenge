@@ -7,15 +7,17 @@ func init() {
 	fmt.Println("utils package initialized")
 }
 
+//-------------------------------List Node -----------------------------------
+type ListNode struct {
+	Value int
+	Next *ListNode
+}
+
+//-------------------------------Tree Node-----------------------------------
 type TreeNode struct {
 	Value int
 	Left *TreeNode
 	Right *TreeNode
-}
-
-type ListNode struct {
-	Value int
-	Next *ListNode
 }
 
 //Not that I don't know generics..Just for backwards compatibility
@@ -34,7 +36,7 @@ func (node *TreeNodeStr) PrintPreorder() {
 	node.Right.PrintPreorder()
 }
 
-
+//-------------------------------Stack-----------------------------------
 /* Definition of stack */
 type Stack []interface{}
 
@@ -69,6 +71,14 @@ func (s *Stack) Size() int {
 	return len(*s)
 }
 
+
+
+
+
+
+
+
+//-------------------------------Test Func-----------------------------------
 func TestFunc() {
 	fmt.Println("calling package function...")
 }
