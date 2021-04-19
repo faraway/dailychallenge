@@ -80,6 +80,7 @@ func lengthOfLIS_bruteforce(nums []int) int {
 
 /**
 Improved solution, but kinda a improvement over the brute force solution above
+Related notes: http://www.faraway.me/2013/02/notes-on-lcs-lis-and-related-problems.html
 */
 func lengthOfLIS(nums []int) int {
 	if nums == nil || len(nums) == 0 {
@@ -100,6 +101,7 @@ func lengthOfLIS(nums []int) int {
 		}
 		//update the result array. If current number is larger than last value of sequence length=i-1 and smaller than last value of sequence length=i
 		//then last value of sequence length=i can be updated to current number.
+		//Note: also, if we do the below search with binary search, then overall complexity can be reduced to O(nlogn) from O(n^2)
 		for i := currLen-2; i>=0; i-- {
 			if num > result[i] && num < result[i+1] {
 				result[i+1] = num
