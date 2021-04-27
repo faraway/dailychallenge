@@ -23,6 +23,14 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+//Print the tree with in "pre order"
+func (node *TreeNode) PrintPreorder() {
+	if node == nil { return }
+	fmt.Print(node.Value," ")
+	node.Left.PrintPreorder()
+	node.Right.PrintPreorder()
+}
+
 //Not that I don't know generics..Just for backwards compatibility
 //(so that I don't have to refactor all existing code)
 type TreeNodeStr struct {
