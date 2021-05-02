@@ -100,6 +100,14 @@ func (s *Set) Remove(v int) {
 	delete(s.list, v)
 }
 
+func (s *Set) GetAll() []int {
+	result := make([]int, len(s.list))
+	for key,_ := range s.list {
+		result = append(result,key)
+	}
+	return result
+}
+
 func (s *Set) Clear() {
 	s.list = make(map[int]struct{})
 }
