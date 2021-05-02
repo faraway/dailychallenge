@@ -1,6 +1,7 @@
 package main
 
 import (
+	"container/heap"
 	. "dailychallenge/utils"
 	"fmt"
 	"time"
@@ -58,15 +59,23 @@ At most 3 * 104 calls will be made to postTweet, getNewsFeed, follow, and unfoll
 
  */
 func main()  {
-
+	fmt.Println("initializing test data...")
+	obj := constructor()
+	obj.PostTweet(1,5)
+	fmt.Println("News feed for user 1 is ", obj.GetNewsFeed(1)) // [5]
+	obj.Follow(1,2)
+	obj.PostTweet(2,6)
+	fmt.Println("News feed for user 1 is ", obj.GetNewsFeed(1)) //[6,5]
+	obj.Unfollow(1,2)
+	fmt.Println("News feed for user 1 is ", obj.GetNewsFeed(1)) // [5]
 }
 
 
 type Twitter struct {
 	//storage for follower/followee relationship  key:userID, value: Set of users he/she follows
 	FollowerRecords map[int]*Set
-	//storage for tweets key:userId, value:list of his/her tweets
-	TweetRecords map[int][]Tweet
+	//storage for tweets key:userId, value:a circular buffer of his/her tweets (latest 10)
+	TweetRecords map[int]*CircularBuffer
 }
 
 type Tweet struct {
@@ -79,7 +88,7 @@ type Tweet struct {
 func constructor() Twitter {
 	twitter := Twitter{}
 	twitter.FollowerRecords = make(map[int]*Set)
-	twitter.TweetRecords = make(map[int][]Tweet)
+	twitter.TweetRecords = make(map[int]*CircularBuffer)
 	return twitter
 }
 
@@ -88,17 +97,49 @@ func constructor() Twitter {
 func (this *Twitter) PostTweet(userId int, tweetId int)  {
 	tweets, existing := this.TweetRecords[userId]
 	if !existing {
-		tweets = []Tweet{}
+		tweets = NewCircularBuffer(10)
 	}
-	tweets = append(tweets, Tweet{tweetId, userId, time.Now().UnixNano()})
+	tweets.Add(Tweet{tweetId, userId, time.Now().UnixNano()})
 	this.TweetRecords[userId] = tweets
 }
 
-//TODO
-/** Retrieve the 10 most recent tweet ids in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user herself. Tweets must be ordered from most recent to least recent. */
-func (this *Twitter) GetNewsFeed(userId int) []int {
+/**
+	Retrieve the 10 most recent tweet ids in the user's news feed.
+	Each item in the news feed must be posted by users who the user followed or by the user herself.
+	Tweets must be ordered from most recent to least recent.
+*/
+const LIMIT = 10
 
-	return []int{}
+func (this *Twitter) GetNewsFeed(userId int) []int {
+	minHeap := &TweetMinHeap{}
+	heap.Init(minHeap)
+
+	followeesSet := this.FollowerRecords[userId]
+	all := []int{userId}
+	if followeesSet != nil {
+		all = append(all, followeesSet.GetAll()...)
+	}
+
+	for _, individualId := range all {
+		tweets := this.TweetRecords[individualId]
+		if tweets != nil {
+			for _, tweet := range tweets.GetAll() {
+				if minHeap.Len() < LIMIT {
+					heap.Push(minHeap, tweet)
+				} else if (*minHeap)[0].timestamp < tweet.timestamp {
+					heap.Pop(minHeap)
+					heap.Push(minHeap, tweet)
+				} //otherwise ignore this tweet
+			}
+		}
+	}
+
+	result := make([]int, minHeap.Len())
+	for i := len(result)-1; i >= 0; i-- {
+		tweet := heap.Pop(minHeap).(Tweet)
+		result[i] = tweet.tweetId
+	}
+	return result
 }
 
 
@@ -122,3 +163,52 @@ func (this *Twitter) Unfollow(followerId int, followeeId int)  {
 	followingIds.Remove(followeeId)
 }
 
+//--------------- circular buffer to store 10 most recent tweets for each user -------------
+type CircularBuffer struct {
+	Tweets []Tweet
+	Limit int
+	currentPos int
+}
+
+func NewCircularBuffer(Limit int) *CircularBuffer {
+	return &CircularBuffer{[]Tweet{}, Limit,0}
+}
+
+func (c *CircularBuffer) Add(item Tweet) {
+	if len(c.Tweets) < c.Limit {
+		c.Tweets = append(c.Tweets, item)
+	} else {
+		c.Tweets[c.currentPos] = item
+		c.currentPos = (c.currentPos + 1) % c.Limit
+	}
+}
+
+func (c *CircularBuffer) GetAll() []Tweet {
+	return c.Tweets //TODO: maybe we should return them in time order based on 'currentPos'
+}
+
+
+//--------------- min-heap to get top 10 most recent tweets ---------------
+type TweetMinHeap []Tweet
+
+func (h TweetMinHeap) Len() int           { return len(h) }
+func (h TweetMinHeap) Less(i, j int) bool { return h[i].timestamp < h[j].timestamp }
+func (h TweetMinHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+
+
+//Note that Push and Pop in this interface are for package "container/heap" implementation to call.
+//To add and remove things from the heap, use heap.Push and heap.Pop.
+//See TestHeap() below
+func (h *TweetMinHeap) Push(x interface{}) {
+	// Push and Pop use pointer receivers because they modify the slice's length,
+	// not just its contents.
+	*h = append(*h, x.(Tweet))
+}
+
+func (h *TweetMinHeap) Pop() interface{}{
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[0 : n-1]
+	return x
+}
