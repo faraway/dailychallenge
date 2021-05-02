@@ -68,6 +68,7 @@ func main()  {
 	fmt.Println("News feed for user 1 is ", obj.GetNewsFeed(1)) //[6,5]
 	obj.Unfollow(1,2)
 	fmt.Println("News feed for user 1 is ", obj.GetNewsFeed(1)) // [5]
+	obj.Unfollow(1,8) //should not do anything because User 1 didn't follow user 8 (yet)
 }
 
 
@@ -159,8 +160,9 @@ func (this *Twitter) Unfollow(followerId int, followeeId int)  {
 	followingIds, existing := this.FollowerRecords[followerId]
 	if !existing {
 		fmt.Println("followee for ", followerId, " doesn't exist!")
+	} else {
+		followingIds.Remove(followeeId)
 	}
-	followingIds.Remove(followeeId)
 }
 
 //--------------- circular buffer to store 10 most recent tweets for each user -------------
