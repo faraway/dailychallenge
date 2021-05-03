@@ -185,8 +185,14 @@ func (c *CircularBuffer) Add(item Tweet) {
 	}
 }
 
-func (c *CircularBuffer) GetAll() []Tweet {
+func (c *CircularBuffer) GetAll() []Tweet { //
 	return c.Tweets //TODO: maybe we should return them in time order based on 'currentPos'
+
+	/**
+	Note: we can also return this as a linked list (max 10),
+	for "GetNewsFeed" to get overall 10 latest news using K linked list merge sort using a max-heap
+	https://github.com/faraway/fucking-algorithm/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%B3%BB%E5%88%97/%E8%AE%BE%E8%AE%A1Twitter.md
+	 */
 }
 
 
