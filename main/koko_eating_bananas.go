@@ -69,7 +69,7 @@ func binarySearch(start int, end int, piles []int, h int) int {
 		}
 	}
     //recursive case
-	mid := (start+end)/2
+	mid := start + (end-start)/2 //prevents overflow
 	currentResult := isValid(piles, h, mid)
 	if !currentResult { //result must be in the right side
 		return binarySearch(mid+1, end, piles, h)
