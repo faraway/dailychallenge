@@ -57,6 +57,9 @@ func backtrackPermuteII(nums []int, track []int, trackCounter map[int]int) {
 		RESULTS = append(RESULTS, result)
 	}
 
+	//in this for loop, we don't want to pick duplicate numbers to backtrack, hence the duplicate checker
+	//e.g. if we first pick "1" during the loop, then next steps in this same loop I don't need to pick "1" again.
+	//because they are the same number, and will result in same (duplicate) backtrack
 	dupChecker := make(map[int]int)
 	for _, num := range nums {
 		if valid(num, trackCounter) && dupChecker[num] == 0 { //find options
