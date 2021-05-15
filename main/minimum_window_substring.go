@@ -34,7 +34,7 @@ func main() {
 
 	fmt.Println("Answer is:", minWindow("ADOBECODEBANC", "ABC")) //BANC
 	fmt.Println("Answer is:", minWindow("a", "a")) //a
-	fmt.Println("Answer is:", minWindow("a", "aa")) //a
+	fmt.Println("Answer is:", minWindow("a", "aa")) //""
 }
 
 func minWindow(s string, t string) string {
@@ -55,12 +55,12 @@ func minWindow(s string, t string) string {
 		}
 		//move left pointer to shrink the window until it no longer covers "t"
 		for containsAllTargetChars(&windowMap, &targetMap) && left < right {
+			newResult := s[left:right]
+			if result == "" || len(newResult) < len(result) {
+				result = newResult
+			}
 			windowMap[s[left]]--
 			left ++
-		}
-		newResult := s[left-1:right] //back off one step on the left side to capture current result
-		if result == "" || len(newResult) < len(result) {
-			result = newResult
 		}
 	}
 	return result
