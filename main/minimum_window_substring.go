@@ -66,6 +66,7 @@ func minWindow(s string, t string) string {
 	return result
 }
 
+//This might be too expensive to do in each step, possible to be blended in the main loop and check individually
 func containsAllTargetChars(windowMap *map[uint8]int, targetMap *map[uint8]int) bool {
 	for key, _ := range *targetMap {
 		if (*windowMap)[key] < (*targetMap)[key] {
