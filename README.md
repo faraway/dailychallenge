@@ -1,6 +1,9 @@
 # Daily Challenge
-This repository contains the code challenge solutions to the questions from *Daily Interview Pro* (https://www.techseries.dev/daily)
+This repository was initially started to contain the code challenge solutions to the questions from *Daily Interview Pro* (https://www.techseries.dev/daily)
 
+Later on it also started to host many solutions to problems on https://leetcode.com/problemset/all/
+
+Leetcode nowadays has more than 2000 problems, it's challenging to solve them all. The pick of the problems to solve is heavily influenced by https://github.com/labuladong/fucking-algorithm 
 ### Code Structure
 Each file is an executable program containing the *main* function. This makes it easy to test/run individual solution easily.
 Some of the files do have the dependency on the _utils_ package which provides some basic data structures.    
