@@ -55,7 +55,7 @@ func main() {
 }
 
 type TimeMap struct {
-	keyMap map[string]*[]ValueEntry
+	keyMap map[string][]ValueEntry
 }
 
 type ValueEntry struct {
@@ -66,18 +66,15 @@ type ValueEntry struct {
 
 /** Initialize your data structure here. */
 func NewTimeMap() TimeMap {
-	return TimeMap{keyMap: make(map[string]*[]ValueEntry)}
+	return TimeMap{keyMap: make(map[string][]ValueEntry)}
 }
 
 
 func (this *TimeMap) Set(key string, value string, timestamp int)  {
 	existingValues := this.keyMap[key]
-	if existingValues == nil {
-		existingValues = &[]ValueEntry{}
-		this.keyMap[key] = existingValues
-	}
 	//Since the timestamps for all TimeMap.set operations are strictly increasing. this will be a sorted array
-	*existingValues = append(*existingValues, ValueEntry{value, timestamp})
+	existingValues = append(existingValues, ValueEntry{value, timestamp})
+	this.keyMap[key] = existingValues
 }
 
 
@@ -87,17 +84,17 @@ func (this *TimeMap) Get(key string, timestamp int) string {
 		return ""
 	}
 	//binary search in iterative manner
-	start, end := 0, len(*values)-1
+	start, end := 0, len(values)-1
 	result := ValueEntry{"", 0}
 	for start <= end {
 		mid := start + (end-start)/2
-		if (*values)[mid].timestamp == timestamp {
-			return (*values)[mid].value
-		} else if (*values)[mid].timestamp > timestamp {
+		if values[mid].timestamp == timestamp {
+			return values[mid].value
+		} else if values[mid].timestamp > timestamp {
 			end = mid - 1
-		} else if (*values)[mid].timestamp < timestamp {
-			if (*values)[mid].timestamp > result.timestamp { //maybe we don't need this check?
-				result = (*values)[mid]
+		} else if values[mid].timestamp < timestamp {
+			if values[mid].timestamp > result.timestamp { //maybe we don't need this check?
+				result = values[mid]
 			}
 			start = mid + 1
 		}
