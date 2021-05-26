@@ -58,12 +58,14 @@ func main() {
 }
 
 func calcEquation(equations [][]string, values []float64, queries [][]string) []float64 {
+	//build the graph
 	graph := make(map[string][]Node)
 	for i, equation := range equations {
 		graph[equation[0]] = append(graph[equation[0]], Node{equation[1], values[i]})
 		graph[equation[1]] = append(graph[equation[1]], Node{equation[0], 1/values[i]})
 	}
 
+	//handle the query
 	var results []float64
 	for _, query := range queries {
 		if query[0] == query [1] && graph[query[0]] != nil {
