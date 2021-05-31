@@ -75,6 +75,8 @@ func main() {
 		},
 	}
 	fmt.Println("Answer is:", leftMostColumnWithOne(matrix)) //1
+	fmt.Println("Answer is:", leftMostColumnWithOne_M_Plus_N(matrix)) //1
+	fmt.Println("Answer is:", leftMostColumnWithOne_Optimal(matrix)) //1
 }
 
 type BinaryMatrix struct {
@@ -82,6 +84,9 @@ type BinaryMatrix struct {
 	Dimensions func() []int
 }
 
+/**
+	Binary search solution O(Mlog(N))
+ */
 func leftMostColumnWithOne(binaryMatrix BinaryMatrix) int {
 	dimensions := binaryMatrix.Dimensions()
 	m, n := dimensions[0], dimensions[1]
@@ -118,4 +123,46 @@ func binarySearchOne(matrix BinaryMatrix, m int, start int, end int) int {
 			return mid
 		}
 	}
+}
+
+/**
+	Easier solution, complexity O(M + N)
+ */
+func leftMostColumnWithOne_M_Plus_N(binaryMatrix BinaryMatrix) int {
+	dimensions := binaryMatrix.Dimensions()
+	m, n := dimensions[0], dimensions[1]
+
+	leftMostColumn := -1
+
+	i, j := 0, n-1
+	for i < m && j >= 0 {
+		if binaryMatrix.Get(i,j) == 1 {
+			leftMostColumn = j
+			j --
+		} else {
+			i ++
+		}
+	}
+	return leftMostColumn
+}
+
+/**
+ My preferred solution - combining above two - O(M + log(N))
+*/
+func leftMostColumnWithOne_Optimal(binaryMatrix BinaryMatrix) int {
+	dimensions := binaryMatrix.Dimensions()
+	m, n := dimensions[0], dimensions[1]
+
+	leftMostColumn := -1
+
+	i, j := 0, n-1
+	for i < m && j >= 0 {
+		candidate := binarySearchOne(binaryMatrix, i, 0, j)
+		if candidate != -1 {
+			leftMostColumn = candidate
+			j = candidate-1 //fast forward to the left most 1 found in this row
+		}
+		i ++                 //move to next row
+	}
+	return leftMostColumn
 }
