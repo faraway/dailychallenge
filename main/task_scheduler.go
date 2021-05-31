@@ -3,6 +3,7 @@ package main
 import (
 	"container/heap"
 	"fmt"
+	"sort"
 )
 
 /**
@@ -57,8 +58,20 @@ func main() {
 	fmt.Println("Answer is:", leastInterval([]byte{'A', 'A', 'A', 'B', 'B', 'B'}, 2)) //8
 	fmt.Println("Answer is:", leastInterval([]byte{'A', 'A', 'A', 'B', 'B', 'B'}, 0)) //6
 	fmt.Println("Answer is:", leastInterval([]byte{'A', 'A', 'A', 'A', 'A', 'A', 'B', 'C', 'D', 'E', 'F', 'G'}, 2)) //16
+	fmt.Println("Answer is:", leastInterval([]byte{'A', 'A', 'A', 'A', 'B', 'B', 'B', 'B', 'C', 'C', 'C', 'D'}, 1)) //12
+	fmt.Println("Answer is:", leastInterval([]byte{'A', 'A', 'A', 'A', 'A','B', 'B', 'B', 'C', 'C', 'C', 'D', 'D', 'D'}, 2)) //14
+
+	fmt.Println("Answer is:", leastInterval_optimal([]byte{'A', 'A', 'A', 'B', 'B', 'B'}, 2)) //8
+	fmt.Println("Answer is:", leastInterval_optimal([]byte{'A', 'A', 'A', 'B', 'B', 'B'}, 0)) //6
+	fmt.Println("Answer is:", leastInterval_optimal([]byte{'A', 'A', 'A', 'A', 'A', 'A', 'B', 'C', 'D', 'E', 'F', 'G'}, 2)) //16
+	fmt.Println("Answer is:", leastInterval_optimal([]byte{'A', 'A', 'A', 'A', 'B', 'B', 'B', 'B', 'C', 'C', 'C', 'D'}, 1)) //12
+	fmt.Println("Answer is:", leastInterval_optimal([]byte{'A', 'A', 'A', 'A', 'A','B', 'B', 'B', 'C', 'C', 'C', 'D', 'D', 'D'}, 2)) //14
 }
 
+/**
+My unique way to solve this problem. Essentially a simulation of task scheduler
+But not as efficient as "right answers"
+ */
 func leastInterval(tasks []byte, n int) int {
 	taskMap := make(map[byte]*Task)
 	for _,task := range tasks {
@@ -79,7 +92,7 @@ func leastInterval(tasks []byte, n int) int {
 	//this is the simulation of the CPU takes the task and run them one by one on each time slice
 	for h.Len() > 0 {
 		if h[0].coolDown == 0 {
-			fmt.Print(string(h[0].id), ",")
+			fmt.Print(string(h[0].id), ",") //for debugging
 			if h[0].count == 1 {
 				heap.Pop(&h)
 			} else {
@@ -101,6 +114,66 @@ func leastInterval(tasks []byte, n int) int {
 	return timer
 }
 
+/**
+Need a little bit math and deduction :)
+https://leetcode.com/problems/task-scheduler/solution/
+
+My notes：
+1。找到频率最高的task，最多可能的空余cycle就是 （f（频率）- 1）X n
+比如 A - - A - - A - - A - - A
+2。然后找其他频率次高的task来填满这些空档 （比如task B 和 C 都频率为3）
+    A - - A - - A - - A - - A
+	  B - - B - - B - -
+		C - - C - - C - -
+
+3。只要剩余的task有足够的频率，总能填满这些空档。并且不会产生新的空档。(需要很多情况推理，不易证明）
+	比如有另一个task D，频率为3。
+	那一个D可以接在B后面， 一个D可以接在C后面，最后一个D可以插在任意之前ABC后面 （因为只要不产生空档就行）
+	接在C后面那个新的D会和B后面那个D冲突，但可以容易的与前面的C调换来解决这个问题。 因为C的频率大于等于D，所以有足够的C来调换
+	A B C A B C A B C A D D D A
+=>  A B D A B C D A B C A D C A
+      (swap) (insert)
+
+4. as long as the idles between the most frequent tasks are filled,
+it's guaranteed that the rest of tasks will not incur new idle time (bcs we can just insert them in between 'A's)
+
+ */
+func leastInterval_optimal(tasks []byte, n int) int {
+	taskMap := make(map[byte]*Task)
+	for _,task := range tasks {
+		var t *Task
+		if taskMap[task] == nil {
+			t = &Task{task, 1, 0}
+			taskMap[task] = t
+		} else {
+			taskMap[task].count++
+		}
+	}
+	var tList []*Task
+	for _, task := range taskMap {
+		tList = append(tList, task)
+	}
+	sort.Slice(tList, func(i, j int) bool {
+		return tList[i].count > tList[j].count
+	})
+
+	maxFrequency := tList[0].count
+	idleTimes := (maxFrequency - 1) * n
+	for i := 1; i < len(tList) && idleTimes > 0; i++ {
+		f := 0
+		if tList[i].count > maxFrequency - 1 {
+			f = maxFrequency - 1
+		} else {
+			f = tList[i].count
+		}
+		idleTimes -= f
+	}
+	if idleTimes < 0 {
+		idleTimes = 0
+	}
+	return len(tasks) + idleTimes
+}
+
 type Task struct {
 	id byte
 	count int
@@ -109,22 +182,22 @@ type Task struct {
 
 type TaskHeap []*Task
 
-func (this TaskHeap) Len() int {
-	return len(this)
+func (h TaskHeap) Len() int {
+	return len(h)
 }
 
-func (this TaskHeap) Less(i int, j int) bool {
-	if this[i].coolDown < this[j].coolDown {
+func (h TaskHeap) Less(i int, j int) bool {
+	if h[i].coolDown < h[j].coolDown {
 		return true
 	}
-	if this[i].coolDown == this[j].coolDown {
-		return this[i].count > this[j].count
+	if h[i].coolDown == h[j].coolDown {
+		return h[i].count > h[j].count
 	}
 	return false
 }
 
-func (this TaskHeap) Swap(i int, j int) {
-	this[i], this[j] = this[j], this[i]
+func (h TaskHeap) Swap(i int, j int) {
+	h[i], h[j] = h[j], h[i]
 }
 
 func (h *TaskHeap) Push(x interface{}) {
