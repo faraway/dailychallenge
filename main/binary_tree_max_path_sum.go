@@ -3,7 +3,6 @@ package main
 import (
 	. "dailychallenge/utils"
 	"fmt"
-	"math"
 )
 
 /**
@@ -73,40 +72,48 @@ func maxPathSum(root *TreeNode) int {
  */
 func maxPathSumInternal(root *TreeNode) (pathMax int, subtreeMax int) {
 	if root == nil {
-		return math.MinInt32, math.MinInt32
+		return 0, 0
 	}
 	leftPathMax, leftSubtreeMax := maxPathSumInternal(root.Left)
 	rightPathMax, rightSubtreeMax := maxPathSumInternal(root.Right)
+
 	//calculate subtreeMax
-	//it's important to calculate subtree max first
-	if leftSubtreeMax > rightSubtreeMax {
-		subtreeMax = leftSubtreeMax
-	} else {
-		subtreeMax = rightSubtreeMax
+	//it's either leftSubtreeMax | rightSubtreeMax | leftPathMax | rightPathMax | leftPathMax + root.node + rightPathMax
+	subtreeMax = root.Value
+	if root.Left != nil {
+		if leftSubtreeMax > subtreeMax {
+			subtreeMax = leftSubtreeMax
+		}
+		if leftPathMax > subtreeMax {
+			subtreeMax = leftPathMax
+		}
 	}
-
-	if leftPathMax > subtreeMax {
-		subtreeMax = leftPathMax
-	}
-	if rightPathMax > subtreeMax {
-		subtreeMax = rightPathMax
-	}
-
-	//calculate pathMax
-	if leftPathMax < 0 {
-		leftPathMax = 0
-	}
-	if rightPathMax < 0 {
-		rightPathMax = 0
-	}
-	if leftPathMax > rightPathMax {
-		pathMax = leftPathMax + root.Value
-	} else {
-		pathMax = rightPathMax + root.Value
+	if root.Right != nil {
+		if rightSubtreeMax > subtreeMax {
+			subtreeMax = rightSubtreeMax
+		}
+		if rightPathMax > subtreeMax {
+			subtreeMax = rightPathMax
+		}
 	}
     //taking both left and right path, going through root. This makes the result subtree max (but not path max) by definition
 	if leftPathMax + root.Value + rightPathMax > subtreeMax {
 		subtreeMax = leftPathMax + root.Value + rightPathMax
+	}
+
+	//calculate pathMax
+	//it's either left path + root node OR right path + root node
+	leftGain, rightGain := 0, 0
+	if leftPathMax > 0 {
+		leftGain = leftPathMax
+	}
+	if rightPathMax > 0 {
+		rightGain = rightPathMax
+	}
+	if leftGain > rightGain {
+		pathMax = leftGain + root.Value
+	} else {
+		pathMax = rightGain + root.Value
 	}
 
 	return pathMax, subtreeMax
