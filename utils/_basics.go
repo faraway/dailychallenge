@@ -49,4 +49,9 @@ func testFun() {
 	array[2] = 3
 	fmt.Println(array[0:2])//slicing
 
+	//delete map elements
+	s := map[int]bool{5: true, 2: true}
+	_, ok := s[6] // check for existence
+	delete(s, 2)
+
 }
