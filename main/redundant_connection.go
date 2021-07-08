@@ -56,6 +56,16 @@ func main() {
 
 	fmt.Println("Answer is:", findRedundantConnection([][]int{{1,2}, {2,3}, {3,4}, {1,4}, {1,5}})) //[1,4]
 }
+
+/**
+ TODO:
+ Alternative solution : https://leetcode.com/problems/redundant-connection/solution/ DFS
+ Incrementally build up the graph while for each new edge seen, check if it makes a loop. This way "find the last edge in the list" is a given.
+ */
+
+/**
+ The following method tries to build up the entire graph first, and then detect the loop, and then figure out "the last edge in the list"
+ */
 func findRedundantConnection(edges [][]int) []int {
 	edgesIndexMap := make(map[[2]int]int)
 	graph := make(map[int][]int)
