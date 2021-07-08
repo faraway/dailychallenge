@@ -84,50 +84,44 @@ func main() {
 }
 
 func accountsMerge(accounts [][]string) [][]string {
-	accountMap := make(map[string]*[]string)
-	var result []*[]string
+	graph := make(map[string][]string) // key: email, value: list of connected other emails
+	accountNameMap := make(map[string]string) //key: email, value: account name
 
 	for _, account := range accounts {
-		fmt.Println("dealing with account:", account)
-		var existingAccount *[]string = nil
-		for i:=1; i<len(account); i++ {
-			if accountMap[account[i]] != nil {
-				existingAccount = accountMap[account[i]]
-				break
-			}
-		}
-		if existingAccount == nil {
-			newAccount := &[]string{account[0]}
-			for i:=1; i<len(account); i++ {
-				//input list can have duplicates within a given account too
-				if accountMap[account[i]] == nil {
-					*newAccount = append(*newAccount, account[i])
-					accountMap[account[i]] = newAccount
-				}
-			}
-			result = append(result, newAccount)
-		} else {
-			for i:=1; i<len(account); i++ {
-				if accountMap[account[i]] == nil {
-					accountMap[account[i]] = existingAccount
-					*existingAccount = append(*existingAccount, account[i])
-				}
-			}
+		name := account[0]
+		for _, email := range account[1:] {
+			//pick the first node to connect with rest.
+			//It doesn't matter the first node has itself inside because we count for it by 'visited' map later
+			graph[account[1]] = append(graph[account[1]], email)
+			//and for sure let the rest connect with the first
+			graph[email] = append(graph[email], account[1])
+			accountNameMap[email] = name
 		}
 	}
-	//prepare, sort and return result
-	var sortedList [][]string
-	for _, r := range result {
-		emails := (*r)[1:]
-		sort.Slice(emails, func(i, j int) bool {
-			return emails[i] < emails[j]
-		})
-		sortedList = append(sortedList, *r)
+
+	sortedAllAccounts := [][]string{}
+	visitedNode := make(map[string]bool)
+	for email, _ := range graph {
+		if !visitedNode[email] {
+			result := []string{}
+			dfs(graph, email, &visitedNode, &result)
+			sort.Slice(result, func(i, j int) bool { //result[1:] because we don't want to include the name
+				return result[i] < result[j]
+			})
+			sortedAllAccounts = append(sortedAllAccounts, append([]string{accountNameMap[email]}, result...))
+		}
 	}
-	return sortedList
+	return sortedAllAccounts
 }
 
-func accountsMergeUnionFind(accounts [][]string) [][]string {
-	//TODO
-	return [][]string{{}}
+func dfs(graph map[string][]string, node string, visited *map[string]bool, result *[]string) {
+	if (*visited)[node] {
+		return
+	}
+	*result = append(*result, node)
+	(*visited)[node] = true
+
+	for _, n := range graph[node] {
+		dfs(graph, n, visited, result)
+	}
 }
