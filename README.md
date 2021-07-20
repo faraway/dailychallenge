@@ -21,3 +21,8 @@ Not that it matters really, but here is the environment variables I use in my Ma
 > export GOPATH=~/go
 >
 > export GOBIN=~/go/bin
+>
+------------------------------
+
+## Summary of coding questions
+[View this doc](summary.md)
