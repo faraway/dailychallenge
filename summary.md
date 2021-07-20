@@ -7,7 +7,7 @@ Such examples are [koko eating bananas](main/koko_eating_bananas.go) for binary 
 for two pointers with sorted array
  
 Practice makes perfect.  
-###
+#
 
 ### 1. Tree Traversal  
 Reference questions:
@@ -15,6 +15,8 @@ Reference questions:
 - [floor and ceiling of K in BST](main/floor_and_ceiling_of_k_in_BST.go)
 - [full binary tree](main/full_binary_tree.go)
 - [invert binary tree](main/invert_binary_tree.go)
+
+#
 
 ### 2. Graph 
 Reference questions:
@@ -25,6 +27,8 @@ Reference questions:
 #### 2.1 BFS (using adjacent list)
 #### 2.2 DFS (using adjacent list)
 
+#
+
 ### 3. Backtrack 
 Reference questions:
 - [max are of island](main/max_area_of_island.go)
@@ -33,19 +37,27 @@ Reference questions:
 - [permutations](main/permutations.go)
 - [permutations II](main/permutations_ii.go)
 
+#
+
 ### 4. Binary search 
 Reference questions:
 - [koko eating bananas](main/koko_eating_bananas.go)
 - [search in rotated sorted array](main/search_in_rotated_sorted_array.go)
+
+#
 
 ### 5. Sliding window 
 Reference questions:
 - [longest substring without repeating characters](main/longest_substring_without_repeating_characters.go)
 - [minimum window substring](main/minimum_window_substring.go)
 
+#
+
 ### 6. Two pointers 
 Reference questions:
 - [doc product of two sparse vectors](main/dot_product_of_two_sparse_vectors.go)
+
+#
 
 ### 7. Handling intervals
 Reference questions:
@@ -55,10 +67,14 @@ Reference questions:
 - [merge list of numbers into ranges](main/merge_list_of_numbers_into_ranges.go)
 - [university career fair](main/university_career_fair.go)
 
+#
+
 ### 8. Combination of data structures
 Reference questions:
 - [stack with max() function in O(1) time](main/max_stack.go)
 - [LRU implementation](main/LRU_cache.go)
+
+#
 
 ### XXX Special / TBD
 Reference questions:
