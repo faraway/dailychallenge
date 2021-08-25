@@ -39,9 +39,42 @@ func main() {
 	fmt.Println("Answer is:", checkSubarraySum([]int{23,2,4,6,7}, 6)) //True
 	fmt.Println("Answer is:", checkSubarraySum([]int{23,2,6,4,7}, 6)) //True
 	fmt.Println("Answer is:", checkSubarraySum([]int{23,2,6,4,7}, 13)) //False
+	fmt.Println("Answer is:", checkSubarraySum([]int{1,0}, 2)) //False
+	fmt.Println("Answer is:", checkSubarraySum([]int{1,0,0}, 2)) //True. 0 is always a multiplier of K as long as subarray size >=2
 }
 
 func checkSubarraySum(nums []int, k int) bool {
+	if len(nums) < 2 {
+		return false
+	}
+
+	sum := 0 // prefix sum
+	sumMap := make(map[int]int) //key:sum (mod by k); value: index of this prefix sum
+
+	//brute force - will timeout
+	for i := 0; i < len(nums); i++ {
+		sum += nums[i]
+		sum %= k
+
+		//the continuous array starts from beginning, i>0 because we need at least 2 elements as defined by the problem
+		if sum == 0 && i > 0 {
+			return true
+		}
+		//the continuous array starts from somewhere in the middle. so then current_sum-k should equal to that prefix sum.
+		//since we took sum=sum%k, then current_sum-k should simply just be same current_sum, hence the sumMap[sum] check
+		idx, exists := sumMap[sum]
+		if exists && (i - idx > 1) {
+			return true
+		}
+		if !exists {
+			sumMap[sum] = i
+		}
+	}
+
+	return false
+}
+
+func checkSubarraySum_brute_force(nums []int, k int) bool {
 	if len(nums) < 2 {
 		return false
 	}
@@ -63,5 +96,4 @@ func checkSubarraySum(nums []int, k int) bool {
 
 	return false
 }
-
 
