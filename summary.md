@@ -31,6 +31,7 @@ Reference questions:
 
 ### 3. Backtrack 
 Reference questions:
+- [combination sum](main/combination_sum.go)
 - [max are of island](main/max_area_of_island.go)
 - [number of islands](main/number_of_islands.go)
 - [number of provinces](main/number_of_provinces.go)
