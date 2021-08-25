@@ -64,6 +64,7 @@ func checkSubarraySum(nums []int, k int) bool {
 		//since we took sum=sum%k, then current_sum-k should simply just be same current_sum, hence the sumMap[sum] check
 		idx, exists := sumMap[sum]
 		if exists && (i - idx > 1) {
+			//this (i-idx) > 1 is also important. it makes sure this subarray size is >=2. such that [1,0] will be false and [1,0,0] will be true.
 			return true
 		}
 		if !exists {
