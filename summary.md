@@ -77,6 +77,14 @@ Reference questions:
 
 #
 
+### 9. Prefix Sum
+Reference article: https://leetcode.com/problems/path-sum-iii/solution/ 
+
+Reference questions:
+- [continuous_subarray_sum](main/continuous_subarray_sum.go) //array
+- [subarray_sum_equals_k](main/TBD.go) //array
+- [path_sum_iii](main/TBD.go) //tree
+
 ### XXX Special / TBD
 Reference questions:
 - [most profit assigning work](main/most_profit_assigning_work.go)
