@@ -29,7 +29,7 @@ func main() {
 
 	fmt.Println("Answer is:", subarraySum([]int{1,1,1}, 2)) //2
 	fmt.Println("Answer is:", subarraySum([]int{1,2,3}, 3)) //2
-	//fmt.Println("Answer is:", subarraySum("({[)]")) //False
+
 }
 
 func subarraySum(nums []int, k int) int {
