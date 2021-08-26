@@ -82,8 +82,8 @@ Reference article: https://leetcode.com/problems/path-sum-iii/solution/
 
 Reference questions:
 - [continuous_subarray_sum](main/continuous_subarray_sum.go) //array
-- [subarray_sum_equals_k](main/TBD.go) //array
-- [path_sum_iii](main/TBD.go) //tree
+- [subarray_sum_equals_k](main/subarray_sum_equals_k.go) //array
+- [path_sum_iii](main/path_sum_iii.go) //tree
 
 ### XXX Special / TBD
 Reference questions:
