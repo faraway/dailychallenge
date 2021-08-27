@@ -24,8 +24,15 @@ Reference questions:
 - [find the celebrity](main/find_the_celebrity.go)
 - [redudant connection](main/redundant_connection.go)
 
-#### 2.1 BFS (using adjacent list)
+#### 2.1 Disjoint Set (a.k.a UnionFind)
+https://leetcode.com/explore/learn/card/graph/618/disjoint-set/3881/
+
+Two flavor or implementations (pseudo code):
+![quick find vs. quick union](./docs/images/quick_find_and_quick_union.png)
+(generally speaking, quick union is better)
+
 #### 2.2 DFS (using adjacent list)
+#### 2.3 BFS (using adjacent list)
 
 #
 
