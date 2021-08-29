@@ -59,8 +59,8 @@ func validTree(n int, edges [][]int) bool {
 		ds.Union(edge[0], edge[1])
 	}
 	//now we make sure all nodes are connected
-	root := ds.Find(ds[0])
-	for _, node := range ds {
+	root := ds.Find(ds.Parent[0])
+	for _, node := range ds.Parent {
 		if ds.Find(node) != root {
 			return false
 		}
