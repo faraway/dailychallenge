@@ -20,6 +20,8 @@ Reference questions:
 
 ### 2. Graph 
 Reference questions:
+- [graph valid tree](main/graph_valid_tree.go)
+- [number of connected components in an undirected graph](main/number_of_connected_components_in_undirected_graph.go)
 - [evaluate division](main/evaluate_division.go)
 - [find the celebrity](main/find_the_celebrity.go)
 - [redudant connection](main/redundant_connection.go)
