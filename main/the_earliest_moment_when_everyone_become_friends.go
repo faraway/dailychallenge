@@ -61,23 +61,17 @@ func earliestAcq(logs [][]int, n int) int {
 		return logs[i][0] < logs[j][0]
 	})
 
+	connectivity := 0
 	ds := NewDisjointSet(n)
 	for _, log := range logs {
-		ds.Union(log[1], log[2])
-		//check if all are friends
-		if isEveryoneFriends(ds, n) {
-			return log[0]
+		if ds.Find(log[1]) != ds.Find(log[2]) {
+			ds.Union(log[1], log[2])
+			connectivity++
+			//we need n-1 edges for n nodes to be fully connected
+			if connectivity == n-1 {
+				return log[0]
+			}
 		}
 	}
 	return -1
-}
-
-func isEveryoneFriends(ds DisjointSet, size int) bool {
-	root := ds.Find(0)
-	for i:=1; i<size; i++ {
-		if ds.Find(i) != root {
-			return false
-		}
-	}
-	return true
 }
