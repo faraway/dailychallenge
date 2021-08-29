@@ -29,7 +29,35 @@ https://leetcode.com/explore/learn/card/graph/618/disjoint-set/3881/
 
 Two flavor or implementations (pseudo code):
 ![quick find vs. quick union](./docs/images/quick_find_and_quick_union.png)
-(generally speaking, quick union is better)
+Generally speaking, quick union is better in terms of overall time efficiency. There are two mechanisms to optimize the *Quick Union* approach.
+##### 2.1.1 Union by rank
+Try to balance the tree during `union` function
+```
+public void union(int x, int y) {
+    int rootX = find(x);
+    int rootY = find(y);
+    if (rootX != rootY) {
+        if (rank[rootX] > rank[rootY]) {
+            root[rootY] = rootX;
+        } else if (rank[rootX] < rank[rootY]) {
+            root[rootX] = rootY;
+        } else {
+            root[rootY] = rootX;
+            rank[rootX] += 1;
+        }
+    }
+}
+```
+##### 2.1.2 Path compression
+Try to cache(and compress) the path during `find` function. 
+```
+public int find(int x) {
+    if (x == root[x]) {
+        return x;
+    }
+    return root[x] = find(root[x]);
+}
+```
 
 #### 2.2 DFS (using adjacent list)
 #### 2.3 BFS (using adjacent list)
