@@ -29,7 +29,7 @@ https://leetcode.com/explore/learn/card/graph/618/disjoint-set/3881/
 
 Two flavor or implementations (pseudo code):
 ![quick find vs. quick union](./docs/images/quick_find_and_quick_union.png)
-Generally speaking, quick union is better in terms of overall time efficiency. There are two mechanisms to optimize the *Quick Union* approach.
+Generally speaking, *Quick Union* is better in terms of overall time efficiency. There are two mechanisms to optimize the *Quick Union* approach.
 ##### 2.1.1 Union by rank
 Try to balance the tree during `union` function
 ```
