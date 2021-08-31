@@ -110,10 +110,16 @@ Reference questions:
 
 #
 
-### 8. Combination of data structures
+### 8. Dynamic Programming
 Reference questions:
-- [stack with max() function in O(1) time](main/max_stack.go)
-- [LRU implementation](main/LRU_cache.go)
+
+1D DP:
+
+- [maximum subarray](main/maximum_subarray.go)
+
+2D DP:
+
+- [edit distance](main/edit_distance.go)
 
 #
 
@@ -135,6 +141,13 @@ Reference questions:
 - [continuous_subarray_sum](main/continuous_subarray_sum.go) //array
 - [subarray_sum_equals_k](main/subarray_sum_equals_k.go) //array
 - [path_sum_iii](main/path_sum_iii.go) //tree
+
+#
+
+### 10. Combination of data structures
+Reference questions:
+- [stack with max() function in O(1) time](main/max_stack.go)
+- [LRU implementation](main/LRU_cache.go)
 
 #
 
