@@ -84,6 +84,7 @@ Reference questions:
 Reference questions:
 - [koko eating bananas](main/koko_eating_bananas.go)
 - [search in rotated sorted array](main/search_in_rotated_sorted_array.go)
+- [capacity_to_ship_package_within_d_days](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/capacity_to_ship_packages_within_days.py)
 
 #
 
