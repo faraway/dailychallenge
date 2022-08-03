@@ -84,6 +84,8 @@ Reference questions:
 Reference questions:
 - [koko eating bananas](main/koko_eating_bananas.go)
 - [search in rotated sorted array](main/search_in_rotated_sorted_array.go)
+- [capacity_to_ship_package_within_d_days](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/capacity_to_ship_packages_within_days.py)
+- [minimize_max_distance_to_gas_stations](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/minimize_max_distance_to_gas_station.py)
 
 #
 
@@ -107,6 +109,8 @@ Reference questions:
 - [merge intervals](main/merge_intervals.go)
 - [merge list of numbers into ranges](main/merge_list_of_numbers_into_ranges.go)
 - [university career fair](main/university_career_fair.go)
+- [minimize_max_distance_to_gas_stations](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/minimize_max_distance_to_gas_station.py)
+  - For hannlding this interval, easier(and the correct way) to use a tuple (per_seg_length, original_length, num_segments) as heap element vs. just a single number after separate. 
 
 #
 
