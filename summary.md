@@ -145,8 +145,22 @@ Reference questions:
 - [continuous_subarray_sum](main/continuous_subarray_sum.go) //array
 - [subarray_sum_equals_k](main/subarray_sum_equals_k.go) //array
 - [path_sum_iii](main/path_sum_iii.go) //tree
-- [range-sum-query-2D-matrix](https://leetcode.com/problems/range-sum-query-2d-immutable/) //not coded up yet
+- [range-sum-query-2D-matrix](https://leetcode.com/problems/range-sum-query-2d-immutable/) //2-D matrix;not coded up yet
 
+
+### 9. Difference array
+Reference article: https://labuladong.github.io/algo/2/20/25/ 
+
+Core ideas, difference array `diff` is:
+```
+diff[i] = nums[i] - nums[i - 1];
+```
+It's good (i.e.`in O(1) time`) for changing (plus, minus) a range of elements.
+For example, in order to add `3` to all the numbers `nums[i..j]`, 
+we just need to do `diff[i] += 3` and `diff[j+1] -= 3` (More detailed explanation in the article linked)
+
+Reference questions:
+- [Car pooling](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/car_pooling.py)
 #
 
 ### 10. Combination of data structures
