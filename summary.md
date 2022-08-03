@@ -147,8 +147,9 @@ Reference questions:
 - [path_sum_iii](main/path_sum_iii.go) //tree
 - [range-sum-query-2D-matrix](https://leetcode.com/problems/range-sum-query-2d-immutable/) //2-D matrix;not coded up yet
 
+#
 
-### 9. Difference array
+### 10. Difference array
 Reference article: https://labuladong.github.io/algo/2/20/25/ 
 
 Core ideas, difference array `diff` is:
