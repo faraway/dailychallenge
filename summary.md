@@ -72,7 +72,7 @@ My golang implementation with above mentioned optimizations: [DisjointSet](utils
 ### 3. Backtrack 
 Reference questions:
 - [combination sum](main/combination_sum.go)
-- [max are of island](main/max_area_of_island.go)
+- [max area of island](main/max_area_of_island.go)
 - [number of islands](main/number_of_islands.go)
 - [number of provinces](main/number_of_provinces.go)
 - [permutations](main/permutations.go)
@@ -141,6 +141,7 @@ Reference questions:
 - [continuous_subarray_sum](main/continuous_subarray_sum.go) //array
 - [subarray_sum_equals_k](main/subarray_sum_equals_k.go) //array
 - [path_sum_iii](main/path_sum_iii.go) //tree
+- [range-sum-query-2D-matrix](https://leetcode.com/problems/range-sum-query-2d-immutable/) //not coded up yet
 
 #
 
