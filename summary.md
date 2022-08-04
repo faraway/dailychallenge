@@ -162,16 +162,19 @@ we just need to do `diff[i] += 3` and `diff[j+1] -= 3` (More detailed explanatio
 
 Reference questions:
 - [Car pooling](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/car_pooling.py)
+- [Corporate flight bookings](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/coporate_flight_bookings.py)
+- [Range addition](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/range_addition.py)
+
 #
 
-### 10. Combination of data structures
+### X. Combination of data structures
 Reference questions:
 - [stack with max() function in O(1) time](main/max_stack.go)
 - [LRU implementation](main/LRU_cache.go)
 
 #
 
-### XXX Special / TBD
+### Special / TBD
 Reference questions:
 - [most profit assigning work](main/most_profit_assigning_work.go)
 - [robot bounded in circle](main/robot_bounded_in_circle.go)
