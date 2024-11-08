@@ -93,6 +93,7 @@ Reference questions:
 Reference questions:
 - [longest substring without repeating characters](main/longest_substring_without_repeating_characters.go)
 - [minimum window substring](main/minimum_window_substring.go)
+- [max consecutive ones](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/max_consecutive_ones_iii.py)
 
 #
 
