@@ -92,6 +92,7 @@ Reference questions:
 ### 5. Sliding window 
 Reference questions:
 - [longest substring without repeating characters](main/longest_substring_without_repeating_characters.go)
+- [longest repeating character replacement](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/longest_repeating_character_replacement.py)
 - [minimum window substring](main/minimum_window_substring.go)
 - [max consecutive ones](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/max_consecutive_ones_iii.py)
 
