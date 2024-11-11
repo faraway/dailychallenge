@@ -168,7 +168,10 @@ Reference questions:
 - [Corporate flight bookings](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/coporate_flight_bookings.py)
 - [Range addition](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/range_addition.py)
 
-#
+### 11. Monotonic Stack
+Reference questions:
+- [Buildings with an ocean view](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/buildings_with_an_ocean_view.py) (if you are only allowed to traverse the array from left to right)
+- [Max stack](main/max_stack.go)
 
 ### X. Combination of data structures
 Reference questions:
