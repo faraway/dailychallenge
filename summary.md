@@ -170,8 +170,9 @@ Reference questions:
 
 ### 11. Monotonic Stack
 Reference questions:
-- [Buildings with an ocean view](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/buildings_with_an_ocean_view.py) (if you are only allowed to traverse the array from left to right)
 - [Max stack](main/max_stack.go)
+- [Buildings with an ocean view](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/buildings_with_an_ocean_view.py) (if you are only allowed to traverse the array from left to right)
+- [Max swap](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/maximum_swap.py)
 
 ### X. Combination of data structures
 Reference questions:
