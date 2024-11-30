@@ -102,6 +102,7 @@ Reference questions:
 Reference questions:
 - [doc product of two sparse vectors](main/dot_product_of_two_sparse_vectors.go) (See [Solution](https://leetcode.com/problems/dot-product-of-two-sparse-vectors/solution/))
 - [2Sum, 3Sum, 4Sum... NSum](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/three_3sum.py)
+- [friends with appropriate ages](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/friends_of_appropriate_ages.py)
 
 #
 
