@@ -112,6 +112,7 @@ either sort on `START` time or `END` time of the interval (depending on the case
 
 Reference questions:
 - [interval list intersections](main/interval_list_intersections.go)
+  - already sorted by interval.START (as well as END time) as the input
 - [meeting room](main/meeting_room_II.go)
 - [merge intervals](main/merge_intervals.go)
   - **sort by interval.START time**
