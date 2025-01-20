@@ -107,15 +107,21 @@ Reference questions:
 #
 
 ### 7. Handling intervals
+Handling intervals can be tricky and tedious. In many cases, problems can be simplified by 
+either sort on `START` time or `END` time of the interval (depending on the cases)  
+
 Reference questions:
 - [interval list intersections](main/interval_list_intersections.go)
 - [meeting room](main/meeting_room_II.go)
 - [merge intervals](main/merge_intervals.go)
+  - **sort by interval.START time**
 - [merge list of numbers into ranges](main/merge_list_of_numbers_into_ranges.go)
 - [university career fair](main/university_career_fair.go)
+  - Greedy algorithm, **sort by interval.END time**
 - [minimize_max_distance_to_gas_stations](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/minimize_max_distance_to_gas_station.py)
   - For hannlding this interval, easier(and the correct way) to use a tuple (per_seg_length, original_length, num_segments) as heap element vs. just a single number after separate. 
-
+- [non-overlapping intervals](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/non_overlapping_intervals.py)
+  - Greedy algorithm, **sort by interval.END time**
 #
 
 ### 8. Dynamic Programming
