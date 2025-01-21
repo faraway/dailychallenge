@@ -123,6 +123,8 @@ Reference questions:
   - For hannlding this interval, easier(and the correct way) to use a tuple (per_seg_length, original_length, num_segments) as heap element vs. just a single number after separate. 
 - [non-overlapping intervals](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/non_overlapping_intervals.py)
   - Greedy algorithm, **sort by interval.END time**
+- [minimum number of arrows to burst balloons](https://github.com/faraway/leetcode-python/blob/main/leetcode-python/minimum_number_of_arrows_to_burst_balloons.py)
+  - Greedy algorithm, **sort by interval.END time** (kinda similar problem to the one above)
 #
 
 ### 8. Dynamic Programming
